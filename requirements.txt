@@ -1,0 +1,10 @@
+streamlit
+sentence-transformers
+scikit-learn
+pandas
+pymupdf
+altair
+torch
+transformers
+sentencepiece
+sacremoses
