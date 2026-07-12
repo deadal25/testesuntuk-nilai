@@ -703,7 +703,7 @@ elif menu == "Leaderboard":
         else:
             selected_job = "All"
         st.markdown("<div style='background-color:#f8f9fa; padding:10px; border-radius:10px; border-left:5px solid #0B5334; margin-bottom:-20px; margin-top:10px;'><p style='margin:0; font-size:11px; color:gray; font-weight:bold;'>🏆 TAMPILKAN PERINGKAT</p></div>", unsafe_allow_html=True)
-        top_n = st.selectbox("", [1, 3, 5, 10, 20], index=1, key="lb_top_n")
+        top_n = st.selectbox("", [1, 3, 5, 10, 20, "All"], index=1, key="lb_top_n")
         if st.button("🔄 Refresh Data", use_container_width=True):
             st.rerun()
         total_kandidat_unik = df_lb[name_col].nunique()
@@ -730,7 +730,10 @@ elif menu == "Leaderboard":
     for col in ["score", "skill", "exp", "edu"]:
         if col in df_filtered.columns:
             df_filtered[col] = df_filtered[col].apply(lambda x: max(0.0, float(x)) if pd.notnull(x) else 0.0)
-    df_filtered = df_filtered.head(top_n).reset_index(drop=True)
+    if top_n != "All":
+        df_filtered = df_filtered.head(top_n).reset_index(drop=True)
+    else:
+        df_filtered = df_filtered.reset_index(drop=True)
     df_filtered["rank"] = df_filtered.index + 1
     # 3. --- TAMPILAN UTAMA ---
     st.markdown(f'<p class="main-title">🏆 Leaderboard CV – {lb_mode}</p>', unsafe_allow_html=True)
