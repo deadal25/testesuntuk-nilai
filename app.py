@@ -250,9 +250,9 @@ button[kind="primary"]:hover {
 """, unsafe_allow_html=True)
 
 def get_score_color(val):
-    if val >= 65:
+    if val >= 50:
         return "#28A745"   # hijau
-    elif val >= 45:
+    elif val >= 35:
         return "#FFC107"   # kuning
     else:
         return "#DC3545"   # merah
